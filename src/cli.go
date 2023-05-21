@@ -21,11 +21,14 @@ var mode = &cobra.Command{
 	Aliases: []string{"mode"},
 	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		targetNs, _ := cmd.Flags().GetString("namespace")
 
 		targetCluster, _ := cmd.Flags().GetString("targetcluster")
-
 		sourceCluster, _ := cmd.Flags().GetString("sourcecluster")
+		targetNs, _ := cmd.Flags().GetString("ns")
+
+		WarningLogger.Println("Source cluster is :: ", sourceCluster)
+		WarningLogger.Println("Target cluster is ::", targetCluster)
+		WarningLogger.Println("Source namespace is ::", targetNs)
 
 		if args[0] == "backup" {
 			WarningLogger.Println("Running only backup mode.. Extracting files under this directory...")
@@ -35,7 +38,6 @@ var mode = &cobra.Command{
 			WarningLogger.Println("This option provides both backup and restore functionality...")
 			sourceClusterclientset := configHandler(sourceCluster)
 			targetClusterclientset := configHandler(targetCluster)
-
 			backup := getBackup(targetNs, sourceClusterclientset)
 
 			restoreBackup(targetNs, targetClusterclientset, backup)
@@ -47,7 +49,7 @@ var mode = &cobra.Command{
 func Execute() {
 
 	rootCmd.AddCommand(mode)
-	mode.PersistentFlags().String("namespace", "", "The target namespace to fetch helm release and restore")
+	mode.PersistentFlags().String("ns", "", "The target namespace to fetch helm release and restore")
 	mode.PersistentFlags().String("targetcluster", "", "Source of the backup of helm releases")
 	mode.PersistentFlags().String("sourcecluster", "", "Target cluster address of helm restore operation")
 

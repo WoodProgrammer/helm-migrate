@@ -1,8 +1,8 @@
-name: restore
+name: migrate
 usage: "backup restore"
 description: "Backup and restore helm charts in entire cluster"
-command: "$HELM_PLUGIN_DIR/helm-restore"
+command: "$HELM_PLUGIN_DIR/helm-migrate"
 platformCommand:
   - os: linux
     arch: amd64
-    command: "$HELM_PLUGIN_DIR/src/helm-restore"
+    command: "$HELM_PLUGIN_DIR/src/helm-migrate"
