@@ -10,7 +10,7 @@ import (
 	"k8s.io/client-go/kubernetes"
 )
 
-func getBackup(clientset *kubernetes.Clientset) []HelmRelease {
+func getBackup(namespace string, clientset *kubernetes.Clientset) []HelmRelease {
 	releaseMap := []HelmRelease{}
 	labelSelector := metav1.LabelSelector{MatchLabels: map[string]string{"owner": "helm"}}
 
@@ -18,7 +18,7 @@ func getBackup(clientset *kubernetes.Clientset) []HelmRelease {
 		LabelSelector: labels.Set(labelSelector.MatchLabels).String(),
 	}
 
-	secrets, err := clientset.CoreV1().Secrets("kube-system").List(context.TODO(), listOptions)
+	secrets, err := clientset.CoreV1().Secrets(namespace).List(context.TODO(), listOptions)
 	if err != nil {
 		fmt.Println(err)
 	}
