@@ -2,6 +2,8 @@ name: Release Go project
 
 on:
   push:
+    paths:
+      - ".github/workflows/build.yaml"
     tags:
       - "*"
 
