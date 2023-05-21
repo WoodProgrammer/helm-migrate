@@ -33,12 +33,10 @@ func restoreBackup(namespace string, clientset *kubernetes.Clientset, releaseMap
 			},
 			Data: map[string][]byte{"release": []byte(release.content)},
 		}
-		result, err := clientset.CoreV1().Secrets(namespace).Create(context.TODO(), &secret, metav1.CreateOptions{})
+		_, err := clientset.CoreV1().Secrets(namespace).Create(context.TODO(), &secret, metav1.CreateOptions{})
 
 		if err != nil {
-			fmt.Println("ERR::", err)
-		} else {
-			fmt.Println(result)
+			ErrorLogger.Println(err)
 		}
 	}
 }
