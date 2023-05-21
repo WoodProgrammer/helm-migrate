@@ -1,9 +1,12 @@
 package main
 
-import (
-	"fmt"
-)
-
 func main() {
-	fmt.Println("Hello")
+
+	sourceClusterclientset := configHandler("kind-kind")
+	targetClusterclientset := configHandler("kind-kind-test-cluster")
+
+	backup := getBackup(sourceClusterclientset)
+
+	restoreBackup(targetClusterclientset, backup)
+
 }

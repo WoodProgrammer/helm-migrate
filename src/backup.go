@@ -1,0 +1,37 @@
+package main
+
+import (
+	"context"
+	"fmt"
+
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+
+	"k8s.io/apimachinery/pkg/labels"
+	"k8s.io/client-go/kubernetes"
+)
+
+func getBackup(clientset *kubernetes.Clientset) []HelmRelease {
+	releaseMap := []HelmRelease{}
+	labelSelector := metav1.LabelSelector{MatchLabels: map[string]string{"owner": "helm"}}
+
+	listOptions := metav1.ListOptions{
+		LabelSelector: labels.Set(labelSelector.MatchLabels).String(),
+	}
+
+	secrets, err := clientset.CoreV1().Secrets("kube-system").List(context.TODO(), listOptions)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	for _, item := range secrets.Items {
+
+		r := HelmRelease{
+			status:  item.ObjectMeta.Labels["status"],
+			version: item.ObjectMeta.Labels["version"],
+			content: string(item.Data["release"]),
+			name:    item.ObjectMeta.Labels["name"],
+		}
+		releaseMap = append(releaseMap, r)
+	}
+	return releaseMap
+}
