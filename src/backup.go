@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"fmt"
 
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
@@ -20,7 +19,7 @@ func getBackup(namespace string, clientset *kubernetes.Clientset) []HelmRelease 
 
 	secrets, err := clientset.CoreV1().Secrets(namespace).List(context.TODO(), listOptions)
 	if err != nil {
-		fmt.Println(err)
+		ErrorLogger.Println(err)
 	}
 
 	for _, item := range secrets.Items {
