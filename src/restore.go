@@ -12,7 +12,7 @@ import (
 
 func restoreBackup(namespace string, clientset *kubernetes.Clientset, releaseMap []HelmRelease) {
 	for _, release := range releaseMap {
-		secretName := fmt.Sprintf("sh.helm.release.v1.%s.v%s", release.name, release.version)
+		secretName := fmt.Sprintf("sh.helm.release.v1.%s.v%s", release.Name, release.Version)
 
 		secret := corev1.Secret{
 			TypeMeta: metav1.TypeMeta{
@@ -26,12 +26,12 @@ func restoreBackup(namespace string, clientset *kubernetes.Clientset, releaseMap
 				Namespace: namespace,
 				Labels: map[string]string{
 					"owner":   "helm",
-					"name":    release.name,
-					"status":  release.status,
-					"version": release.version,
+					"name":    release.Name,
+					"status":  release.Status,
+					"version": release.Version,
 				},
 			},
-			Data: map[string][]byte{"release": []byte(release.content)},
+			Data: map[string][]byte{"release": []byte(release.Content)},
 		}
 		_, err := clientset.CoreV1().Secrets(namespace).Create(context.TODO(), &secret, metav1.CreateOptions{})
 

@@ -25,10 +25,10 @@ func getBackup(namespace string, clientset *kubernetes.Clientset) []HelmRelease 
 	for _, item := range secrets.Items {
 
 		r := HelmRelease{
-			status:  item.ObjectMeta.Labels["status"],
-			version: item.ObjectMeta.Labels["version"],
-			content: string(item.Data["release"]),
-			name:    item.ObjectMeta.Labels["name"],
+			Status:  item.ObjectMeta.Labels["status"],
+			Version: item.ObjectMeta.Labels["version"],
+			Content: string(item.Data["release"]),
+			Name:    item.ObjectMeta.Labels["name"],
 		}
 		releaseMap = append(releaseMap, r)
 	}

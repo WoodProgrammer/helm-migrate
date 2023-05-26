@@ -1,22 +1,28 @@
 package main
 
 import (
+	"fmt"
+	"os"
+
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/tools/clientcmd"
 )
 
-func configHandler(contextToUse string) *kubernetes.Clientset {
-	/*var kubeconfig *string
+func configHandler(contextToUse string, kubeconfig string) *kubernetes.Clientset {
+	var filename string
+	var kubeconfigPath string
+	dirname, err := os.UserHomeDir()
 
-	if home := homedir.HomeDir(); home != "" {
-		kubeconfig = flag.String("kubeconfig", filepath.Join(home, ".kube", "config"), "(optional) absolute path to the kubeconfig file")
-	} else {
-		kubeconfig = flag.String("kubeconfig", "", "absolute path to the kubeconfig file")
+	if kubeconfig == "" {
+		filename = ".kube/config"
+		kubeconfigPath = fmt.Sprintf("%s/%s", dirname, filename)
+
 	}
-	flag.Parse()*/
+
+	WarningLogger.Println("The obtained kubeconfig path is %s", kubeconfigPath)
 
 	config, err := clientcmd.NewNonInteractiveDeferredLoadingClientConfig(
-		&clientcmd.ClientConfigLoadingRules{ExplicitPath: "/Users/user/.kube/config"},
+		&clientcmd.ClientConfigLoadingRules{ExplicitPath: kubeconfigPath},
 		&clientcmd.ConfigOverrides{
 			CurrentContext: contextToUse,
 		}).ClientConfig()

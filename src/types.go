@@ -1,8 +1,8 @@
 package main
 
 type HelmRelease struct {
-	name    string
-	version string
-	status  string
-	content string
+	Name    string
+	Version string
+	Status  string
+	Content string
 }
