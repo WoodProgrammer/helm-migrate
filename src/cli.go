@@ -28,18 +28,19 @@ var mode = &cobra.Command{
 		sourceCluster, _ := cmd.Flags().GetString("sourcecluster")
 		targetNs, _ := cmd.Flags().GetString("ns")
 		rollback, _ := cmd.Flags().GetBool("rollback")
+		kubeconfig, _ := cmd.Flags().GetString("kubeconfig")
 
 		WarningLogger.Println("Source cluster is :: ", sourceCluster)
 		WarningLogger.Println("Target cluster is ::", targetCluster)
 		WarningLogger.Println("Source namespace is ::", targetNs)
-		sourceClusterclientset := configHandler(sourceCluster)
+		sourceClusterclientset := configHandler(sourceCluster, kubeconfig)
 
 		if args[0] == "backup" {
 			WarningLogger.Println("Running only backup mode.. Extracting files under this directory...")
 			backup := getBackup(targetNs, sourceClusterclientset)
 			currentTime := time.Now()
 
-			backupFile := fmt.Sprintf("%d-%d-%d-%d-%d-%d-helm.backup\n",
+			backupFile := fmt.Sprintf("%d-%d-%d-%d-%d-%d-helm.backup",
 				currentTime.Year(),
 				currentTime.Month(),
 				currentTime.Day(),
@@ -49,10 +50,10 @@ var mode = &cobra.Command{
 
 			dump(backupFile, backup)
 
-		} else if args[0] == "restore" || args[0] == "full" {
+		} else if args[0] == "full" {
 			WarningLogger.Println("This option provides both backup and restore functionality...")
-			sourceClusterclientset := configHandler(sourceCluster)
-			targetClusterclientset := configHandler(targetCluster)
+			sourceClusterclientset := configHandler(sourceCluster, kubeconfig)
+			targetClusterclientset := configHandler(targetCluster, kubeconfig)
 			backup := getBackup(targetNs, sourceClusterclientset)
 
 			restoreBackup(targetNs, targetClusterclientset, backup)
@@ -70,6 +71,7 @@ func Execute() {
 	mode.PersistentFlags().String("targetcluster", "", "Source of the backup of helm releases")
 	mode.PersistentFlags().String("sourcecluster", "", "Target cluster address of helm restore operation")
 	mode.PersistentFlags().String("rollback", "", "This option provides rollback option enabled whether or not")
+	mode.PersistentFlags().String("kubeconfig", "", "This path of the kubeconfig")
 
 	if err := rootCmd.Execute(); err != nil {
 		ErrorLogger.Println(os.Stderr, "Whoops. There was an error while executing your CLI '%s'", err)
