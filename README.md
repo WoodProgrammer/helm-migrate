@@ -49,7 +49,8 @@ Coming sooon....
 * Restore Mode
 
 ```sh
-helm migrate mode restore --namespace kube-system --sourcecluster kind-kind --targetcluster kind-kind-test-cluster
+helm migrate mode restore --namespace kube-system --sourcecluster kind-kind --targetcluster kind-kind-test-cluster \
+--kubeconfig $KUBECONFIGPATH
 ```
 
 ## TODO
