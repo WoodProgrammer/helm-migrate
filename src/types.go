@@ -1,5 +1,9 @@
 package main
 
+type Version struct {
+	releaseNumber string
+	state         string
+}
 type HelmRelease struct {
 	Name    string
 	Version string
