@@ -42,12 +42,6 @@ After you download and install the entire package to verify the steps you can ch
 
 ## Usage 
 
-* Backup Only Mode
-
-Coming sooon....
-
-* Restore Mode
-
 ```sh
 helm migrate mode restore --namespace kube-system --sourcecluster kind-kind --targetcluster kind-kind-test-cluster \
 --kubeconfig $KUBECONFIGPATH
