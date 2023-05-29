@@ -28,7 +28,6 @@ var mode = &cobra.Command{
 		targetCluster, _ := cmd.Flags().GetString("targetcluster")
 		sourceCluster, _ := cmd.Flags().GetString("sourcecluster")
 		targetNs, _ := cmd.Flags().GetString("ns")
-		//rollback, _ := cmd.Flags().GetBool("rollback")
 		kubeconfig, _ := cmd.Flags().GetString("kubeconfig")
 
 		WarningLogger.Println("Source cluster is :: ", sourceCluster)
@@ -60,6 +59,7 @@ var mode = &cobra.Command{
 			restoreBackup(targetNs, targetClusterclientset, backup)
 			WarningLogger.Println("Rollback option is enabled ")
 			WarningLogger.Println("Rolling Process just initalized ")
+
 			for _, release := range backup {
 				InfoLogger.Println("Release rolling back")
 				InfoLogger.Println(release.Name)
@@ -79,7 +79,6 @@ func Execute() {
 	mode.PersistentFlags().String("ns", "", "The target namespace to fetch helm release and restore")
 	mode.PersistentFlags().String("targetcluster", "", "Source of the backup of helm releases")
 	mode.PersistentFlags().String("sourcecluster", "", "Target cluster address of helm restore operation")
-	mode.PersistentFlags().String("rollback", "", "This option provides rollback option enabled whether or not")
 	mode.PersistentFlags().String("kubeconfig", "", "This path of the kubeconfig")
 
 	if err := rootCmd.Execute(); err != nil {
