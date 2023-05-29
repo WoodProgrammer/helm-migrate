@@ -52,9 +52,3 @@ Coming sooon....
 helm migrate mode restore --namespace kube-system --sourcecluster kind-kind --targetcluster kind-kind-test-cluster \
 --kubeconfig $KUBECONFIGPATH
 ```
-
-## TODO
-
-* Backup only mode
-* Better output
-* Data Backup and Restore

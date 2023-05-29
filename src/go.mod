@@ -3,6 +3,7 @@ module helm-restore/src
 go 1.20
 
 require (
+	github.com/kyokomi/emoji/v2 v2.2.12
 	github.com/spf13/cobra v1.7.0
 	helm.sh/helm/v3 v3.12.0
 	k8s.io/api v0.27.2
