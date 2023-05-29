@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"strconv"
 	"time"
 
 	"github.com/spf13/cobra"
@@ -63,9 +64,9 @@ var mode = &cobra.Command{
 				InfoLogger.Println("Release rolling back")
 				InfoLogger.Println(release.Name)
 				InfoLogger.Println(release.Version)
-				//version, _ := strconv.Atoi(release.Version)
+				version, _ := strconv.Atoi(release.Version)
 
-				//rollBack(release.Name, version, targetNs, targetCluster)
+				rollBack(release.Name, version, targetNs, targetCluster)
 			}
 
 		}
