@@ -27,7 +27,7 @@ var mode = &cobra.Command{
 		targetCluster, _ := cmd.Flags().GetString("targetcluster")
 		sourceCluster, _ := cmd.Flags().GetString("sourcecluster")
 		targetNs, _ := cmd.Flags().GetString("ns")
-		rollback, _ := cmd.Flags().GetBool("rollback")
+		//rollback, _ := cmd.Flags().GetBool("rollback")
 		kubeconfig, _ := cmd.Flags().GetString("kubeconfig")
 
 		WarningLogger.Println("Source cluster is :: ", sourceCluster)
@@ -57,9 +57,17 @@ var mode = &cobra.Command{
 			backup := getBackup(targetNs, sourceClusterclientset)
 
 			restoreBackup(targetNs, targetClusterclientset, backup)
-			if rollback == true {
-				WarningLogger.Println("Rollback option is enabled ")
+			WarningLogger.Println("Rollback option is enabled ")
+			WarningLogger.Println("Rolling Process just initalized ")
+			for _, release := range backup {
+				InfoLogger.Println("Release rolling back")
+				InfoLogger.Println(release.Name)
+				InfoLogger.Println(release.Version)
+				//version, _ := strconv.Atoi(release.Version)
+
+				//rollBack(release.Name, version, targetNs, targetCluster)
 			}
+
 		}
 	},
 }
