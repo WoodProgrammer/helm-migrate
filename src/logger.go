@@ -3,6 +3,8 @@ package main
 import (
 	"log"
 	"os"
+
+	"github.com/kyokomi/emoji/v2"
 )
 
 var (
@@ -12,7 +14,11 @@ var (
 )
 
 func init() {
-	InfoLogger = log.New(os.Stdout, "INFO: ", log.Ldate|log.Ltime)
-	WarningLogger = log.New(os.Stdout, "WARNING: ", log.Ldate|log.Ltime)
-	ErrorLogger = log.New(os.Stdout, "ERROR: ", log.Ldate|log.Ltime)
+	InfoMessage := emoji.Sprint("INFO: :white_check_mark: ")
+	WarningPrefix := emoji.Sprint("WARNING: :warning: ")
+	ErrorPrefix := emoji.Sprint("ERROR: :fire:")
+
+	InfoLogger = log.New(os.Stdout, InfoMessage, log.Ldate|log.Ltime)
+	WarningLogger = log.New(os.Stdout, WarningPrefix, log.Ldate|log.Ltime)
+	ErrorLogger = log.New(os.Stdout, ErrorPrefix, log.Ldate|log.Ltime)
 }
