@@ -42,6 +42,11 @@ After you download and install the entire package to verify the steps you can ch
 
 ## Usage 
 
+## Example Usage
+
+<img src="./video/movie.gif"></img>
+
+
 ```sh
 helm migrate mode restore --namespace kube-system --sourcecluster kind-kind --targetcluster kind-kind-test-cluster \
 --kubeconfig $KUBECONFIGPATH
