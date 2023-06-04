@@ -1,6 +1,5 @@
 builds:
-  - main: ./src/
-    binary: ./bin/helm-migrate
+  - binary: ./bin/helm-migrate
     flags:
       - -trimpath
 
