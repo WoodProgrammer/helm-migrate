@@ -2,3 +2,9 @@ builds:
   - binary: ./bin/helm-migrate
     flags:
       - -trimpath
+
+archives:
+  - id: tar
+    format: tar.gz
+    files:
+      - plugin.yaml
