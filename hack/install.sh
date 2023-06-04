@@ -28,7 +28,7 @@ on_exit() {
 trap on_exit EXIT
 
 version="$(cat plugin.yaml | grep "version" | cut -d '"' -f 2)"
-echo "Downloading and installing helm-migrate v${version} ..."
+echo "Downloading and installing helm-migrate ${version} ..."
 
 arch=""
 case "$(uname -m)" in
@@ -51,8 +51,8 @@ case "$(uname)" in
     ;;
 esac
 
-binary_url="https://github.com/WoodProgrammer/helm-migrate/releases/download/v${version}/helm-migrate_${version}_${os}_${arch}.tar.gz"
-checksum_url="https://github.com/WoodProgrammer/helm-migrate/releases/download/v${version}/helm-migrate_${version}_checksums.txt"
+binary_url="https://github.com/WoodProgrammer/helm-migrate/releases/download/${version}/helm-migrate_${version}_${os}_${arch}.tar.gz"
+checksum_url="https://github.com/WoodProgrammer/helm-migrate/releases/download/${version}/helm-migrate_${version}_checksums.txt"
 
 mkdir -p "bin"
 mkdir -p "releases/${version}"
