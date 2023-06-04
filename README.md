@@ -8,15 +8,12 @@ The installation part is very simple you can easily install with via native helm
 
 * Installation
 ```sh
-    git clone git@github.com:WoodProgrammer/helm-migrate.git
-    
-    pushd helm-migrate
-        wget https://github.com/WoodProgrammer/helm-migrate/releases/download/0.0.1/helm-migrate_0.0.2_OS_amd64.tar.gz
-        tar -xvf helm-migrate_0.0.2_OS_amd64.tar.gz
-    
-        helm plugin install .
-    popd
+    helm plugin install https://github.com/WoodProgrammer/helm-migrate.git 
+```
+You can also specify version tag;
 
+```sh
+    helm plugin install https://github.com/WoodProgrammer/helm-migrate.git --version 0.0.6
 ```
 
 After you download and install the entire package to verify the steps you can check this one
