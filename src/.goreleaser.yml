@@ -6,6 +6,3 @@ builds:
 archives:
   - id: tar
     format: tar.gz
-    files:
-      - LICENSE
-      - plugin.yaml
