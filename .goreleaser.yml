@@ -3,8 +3,6 @@ builds:
     binary: ./bin/helm-migrate
     flags:
       - -trimpath
-    env:
-      - CGO_ENABLED=0
 
 archives:
   - id: tar
