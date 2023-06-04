@@ -13,7 +13,7 @@ The installation part is very simple you can easily install with via native helm
 You can also specify version tag;
 
 ```sh
-    helm plugin install https://github.com/WoodProgrammer/helm-migrate.git --version 0.0.6
+    helm plugin install https://github.com/WoodProgrammer/helm-migrate.git --version 0.0.7
 ```
 
 After you download and install the entire package to verify the steps you can check this one
