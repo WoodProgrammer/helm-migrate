@@ -55,9 +55,9 @@ binary_url="https://github.com/WoodProgrammer/helm-migrate/releases/download/v${
 checksum_url="https://github.com/WoodProgrammer/helm-migrate/releases/download/v${version}/helm-migrate_${version}_checksums.txt"
 
 mkdir -p "bin"
-mkdir -p "releases/v${version}"
-binary_filename="releases/v${version}.tar.gz"
-checksums_filename="releases/v${version}_checksums.txt"
+mkdir -p "releases/${version}"
+binary_filename="releases/${version}.tar.gz"
+checksums_filename="releases/${version}_checksums.txt"
 
 # Download binary and checksums files.
 (
@@ -86,6 +86,6 @@ checksums_filename="releases/v${version}_checksums.txt"
 )
 
 # Unpack the binary.
-tar xzf "${binary_filename}" -C "releases/v${version}"
-mv "releases/v${version}/bin/helm-migrate" "bin/helm-migrate"
+tar xzf "${binary_filename}" -C "releases/${version}"
+mv "releases/${version}/bin/helm-migrate" "bin/helm-migrate"
 exit 0
