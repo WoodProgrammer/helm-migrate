@@ -1,4 +1,4 @@
-module helm-restore/cmd/helm-migrate
+module helm-restore
 
 go 1.20
 
