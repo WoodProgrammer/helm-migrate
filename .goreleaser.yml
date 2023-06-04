@@ -3,7 +3,9 @@ builds:
     binary: ./bin/helm-migrate
     flags:
       - -trimpath
-
+    env:
+      - CGO_ENABLED=0
+      - GO111MODULE=on
 archives:
   - id: tar
     format: tar.gz
