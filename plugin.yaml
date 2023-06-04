@@ -1,0 +1,9 @@
+name: migrate
+version: "0.0.6"
+usage: "backup restore"
+description: "Backup and restore helm charts in entire cluster"
+command: "$HELM_PLUGIN_DIR/bin/helm-migrate"
+platformCommand:
+  - os: linux
+    arch: amd64
+    command: "$HELM_PLUGIN_DIR/src/helm-migrate"
