@@ -6,3 +6,5 @@ builds:
 archives:
   - id: tar
     format: tar.gz
+    files:
+      - ../plugin.yaml
