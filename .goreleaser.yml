@@ -5,7 +5,7 @@ builds:
       - -trimpath
     env:
       - CGO_ENABLED=0
-      - GO111MODULE=on
+      - GO111MODULE=auto
 archives:
   - id: tar
     format: tar.gz
